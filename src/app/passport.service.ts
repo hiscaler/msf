@@ -14,7 +14,7 @@ const httpOptions = {
 })
 export class PassportService {
 
-  private endpoint = 'passport/login';
+  private endpoint = environment.apiPrefix + 'passport/login';
 
   constructor(
     private http: HttpClient
@@ -22,7 +22,7 @@ export class PassportService {
   }
 
   login(passport: Passport): Observable<any> {
-    return this.http.post<Passport>(environment.apiPrefix + this.endpoint, passport, httpOptions).pipe(
+    return this.http.post<Passport>(this.endpoint, passport, httpOptions).pipe(
       catchError(this.handleError<Passport>('login'))
     );
   }
