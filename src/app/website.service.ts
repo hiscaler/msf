@@ -9,7 +9,7 @@ export class WebsiteService {
 
   constructor(
     private http: HttpClient
-  ) { }
+  ) {
+  }
 
-  getWebsites():Observable<>
 }
