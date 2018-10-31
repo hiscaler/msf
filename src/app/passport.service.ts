@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from "rxjs";
-import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
 import { catchError } from "rxjs/operators";
 import { Passport } from "./models/Passport";
 import { environment } from "../environments/environment";
 
 const httpOptions = {
-  headers: new HttpHeaders({'Content-Type': 'application/json'})
+  headers: new HttpHeaders({'Content-Type': "application/x-www-form-urlencoded"})
 };
 
 @Injectable({
@@ -22,7 +22,11 @@ export class PassportService {
   }
 
   login(passport: Passport): Observable<any> {
-    return this.http.post<Passport>(this.endpoint, passport, httpOptions).pipe(
+    const data = new HttpParams()
+      .append("username", passport.username)
+      .append("password", passport.password);
+
+    return this.http.post<Passport>(this.endpoint, data, httpOptions).pipe(
       catchError(this.handleError<Passport>('login'))
     );
   }
