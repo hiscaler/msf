@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Member } from '../models/Member';
-import { HttpClient } from "@angular/common/http";
-import { Observable, of } from "rxjs";
-import { catchError } from "rxjs/operators";
+import { HttpClient } from '@angular/common/http';
+import { Observable, of } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
