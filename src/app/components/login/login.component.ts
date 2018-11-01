@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {Passport} from '../models/Passport';
-import {PassportService} from '../services/passport.service';
-import {FlashMessageService} from '../services/flash-message.service';
+import {Passport} from '../../models/Passport';
+import {PassportService} from '../../services/passport.service';
+import {FlashMessageService} from '../../services/flash-message.service';
 
 @Component({
   selector: 'app-login',
