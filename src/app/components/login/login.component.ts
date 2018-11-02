@@ -25,8 +25,7 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
   }
 
-  login(passport: Passport):
-    boolean {
+  login(passport: Passport): boolean {
     this.passportService.login(passport).subscribe(
       response => {
         console.info(response);
