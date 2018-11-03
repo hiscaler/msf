@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Website } from "../../../models/Website";
+import { WebsiteService } from "../../../services/website.service";
 
 @Component({
   selector: 'app-website-form',
@@ -11,19 +12,19 @@ export class WebsiteFormComponent implements OnInit {
   model = new Website();
   submitted = false;
 
-  constructor() {
+  constructor(private websiteService: WebsiteService) {
   }
 
   ngOnInit() {
   }
 
-  create() {
-    this.model.domain = 'www.example.com';
-    this.model.enabled = true;
-  }
-
-  onSubmit() {
+  create(website: Website): void {
     this.submitted = true;
+    this.websiteService.create(website).subscribe(response => {
+      if (response.success) {
+        this.model = response.data.items;
+      }
+    });
   }
 
 }

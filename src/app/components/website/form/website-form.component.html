@@ -1,4 +1,4 @@
-<form #websiteForm="ngForm" (ngSubmit)="onSubmit()">
+<form #websiteForm="ngForm" (ngSubmit)="create(model)">
     <div class="form-group">
         <label for="domain">域名</label>
         <input type="text" class="form-control" id="domain" required="required"
@@ -6,7 +6,7 @@
         TODO: remove this: {{model.domain}}
     </div>
     <div class="form-group">
-        <label for="domain">激活</label>
+        <label for="enabled">激活</label>
         <input type="checkbox" id="enabled" required="required"
                [(ngModel)]="model.enabled" name="domain">
         TODO: remove this: {{model.enabled}}
