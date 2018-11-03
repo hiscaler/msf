@@ -27,7 +27,7 @@ export class WebsiteComponent implements OnInit {
     });
   }
 
-  create(website: Website):void {
+  create(website: Website): void {
     this.websiteService.create(website).subscribe(response => {
       if (response.success) {
         this.websites = response.data.items;
