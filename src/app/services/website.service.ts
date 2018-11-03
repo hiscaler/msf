@@ -23,5 +23,13 @@ export class WebsiteService {
     return this.http.post<Website>(this.endpoint, website);
   }
 
+  update(website: Website): Observable<Website> {
+    return this.http.post<Website>(this.endpoint, website);
+  }
+
+  delete(website: Website): Observable<Website> {
+    return this.http.post<Website>(this.endpoint, website);
+  }
+
 
 }

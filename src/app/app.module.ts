@@ -7,6 +7,7 @@ import { WebsiteComponent } from './components/website/website.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './components/login/login.component';
+import { WebsiteFormComponent } from './components/website/form/website-form.component';
 
 const apiPrefix = '192.168.1.1/index.php/api';
 
@@ -14,7 +15,8 @@ const apiPrefix = '192.168.1.1/index.php/api';
   declarations: [
     AppComponent,
     WebsiteComponent,
-    LoginComponent
+    LoginComponent,
+    WebsiteFormComponent
   ],
   imports: [
     BrowserModule,

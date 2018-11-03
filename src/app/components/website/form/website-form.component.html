@@ -1,0 +1,15 @@
+<form #websiteForm="ngForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+        <label for="domain">域名</label>
+        <input type="text" class="form-control" id="domain" required="required"
+               [(ngModel)]="model.domain" name="domain">
+        TODO: remove this: {{model.domain}}
+    </div>
+    <div class="form-group">
+        <label for="domain">激活</label>
+        <input type="checkbox" id="enabled" required="required"
+               [(ngModel)]="model.enabled" name="domain">
+        TODO: remove this: {{model.enabled}}
+    </div>
+    <button type="submit" class="btn btn-success" [disabled]="!websiteForm.form.valid">提交</button>
+</form>

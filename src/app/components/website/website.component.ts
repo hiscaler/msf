@@ -9,6 +9,7 @@ import { WebsiteService } from "../../services/website.service";
 })
 export class WebsiteComponent implements OnInit {
 
+  website: Website;
   websites: Website[];
 
   constructor(private websiteService: WebsiteService) {
@@ -26,12 +27,21 @@ export class WebsiteComponent implements OnInit {
     });
   }
 
-  createWebsite():void {
-
+  create(website: Website):void {
+    this.website = new Website(1, 'www.example.com');
+    this.websiteService.create(website).subscribe(response => {
+      if (response.success) {
+        this.websites = response.data.items;
+      }
+    });
   }
 
-  updateWebsite(id: number): void {
-
+  update(id: number): void {
+    this.websiteService.getWebsites().subscribe(response => {
+      if (response.success) {
+        this.websites = response.data.items;
+      }
+    });
   }
 
 }
