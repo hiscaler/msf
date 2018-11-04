@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Injector } from '@angular/core';
 import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpResponse } from '@angular/common/http';
 import { Observable, of } from "rxjs";
 import { catchError, mergeMap } from "rxjs/operators";
@@ -7,7 +7,7 @@ import { Router } from "@angular/router";
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
 
-  constructor(private router: Router) {
+  constructor(private injector: Injector) {
   }
 
   intercept(
@@ -17,7 +17,6 @@ export class AuthInterceptor implements HttpInterceptor {
 
     let url = `http://localhost:8003/index.php/api/${req.url}`;
     const accessToken = localStorage.getItem('accessToken');
-    console.info(req.url);
     if (accessToken && req.url != 'passport/login') {
       if (url.indexOf('?') !== -1) {
         url += '&';
@@ -42,6 +41,10 @@ export class AuthInterceptor implements HttpInterceptor {
     );
   }
 
+  private goTo(url: string) {
+    setTimeout(() => this.injector.get(Router).navigateByUrl(url));
+  }
+
 
   private handleData(
     event: HttpResponse<any>|HttpErrorResponse,
@@ -50,15 +53,16 @@ export class AuthInterceptor implements HttpInterceptor {
     switch (event.status) {
       case 200:
         if (event instanceof HttpResponse) {
-          const body: any = event.body;
-          if (body && body.rc == 3) {
-            // this.goTo('/test');
+          const resp: any = event.body;
+          if (resp && resp.success) {
+            return of(resp)
+          } else {
+            alert(resp.error.message);
           }
         }
         break;
-      case 400: // 未登录状态码
       case 401: // 未登录状态码
-        // this.goTo('/login');
+        this.goTo('/passport/login');
         break;
       case 404:
       case 500:
