@@ -15,7 +15,7 @@ const httpOptions = {
 })
 export class PassportService {
 
-  private endpoint = environment.apiPrefix + 'passport/login';
+  private endpoint = 'passport/login';
 
   constructor(
     private http: HttpClient,

@@ -5,9 +5,10 @@ import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
 import { WebsiteComponent } from './components/website/website.component';
 import { AppRoutingModule } from './app-routing.module';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './components/login/login.component';
 import { WebsiteFormComponent } from './components/website/form/website-form.component';
+import { AuthInterceptor } from "./http-interceptors/auth-interceptor";
 
 const apiPrefix = '192.168.1.1/index.php/api';
 
@@ -24,7 +25,9 @@ const apiPrefix = '192.168.1.1/index.php/api';
     FormsModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

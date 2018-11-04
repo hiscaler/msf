@@ -10,7 +10,7 @@ import { Observable } from "rxjs";
 
 export class WebsiteService {
 
-  private endpoint = environment.apiPrefix + 'tj/website/index';
+  private endpoint = 'tj/website/index';
 
   constructor(private http: HttpClient) {
   }
