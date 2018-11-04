@@ -49,19 +49,18 @@ export class AuthInterceptor implements HttpInterceptor {
   private handleData(
     event: HttpResponse<any>|HttpErrorResponse,
   ): Observable<any> {
-    // 业务处理：一些通用操作
     switch (event.status) {
       case 200:
         if (event instanceof HttpResponse) {
           const resp: any = event.body;
           if (resp && resp.success) {
-            return of(resp)
+            return of(event)
           } else {
             alert(resp.error.message);
           }
         }
         break;
-      case 401: // 未登录状态码
+      case 401:
         this.goTo('/passport/login');
         break;
       case 404:
