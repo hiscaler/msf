@@ -10,8 +10,6 @@ import { LoginComponent } from './components/login/login.component';
 import { WebsiteFormComponent } from './components/website/form/website-form.component';
 import { AuthInterceptor } from "./http-interceptors/auth-interceptor";
 
-const apiPrefix = '192.168.1.1/index.php/api';
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,7 +24,11 @@ const apiPrefix = '192.168.1.1/index.php/api';
     AppRoutingModule
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    }
   ],
   bootstrap: [AppComponent]
 })
