@@ -26,7 +26,6 @@ export class AuthInterceptor implements HttpInterceptor {
       url += `accessToken=${accessToken}`;
     }
 
-
     const authReq = req.clone({
       url: url
     });
