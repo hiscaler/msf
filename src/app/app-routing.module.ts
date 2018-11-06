@@ -9,6 +9,7 @@ const routes: Routes = [
   {path: 'passport/login', component: LoginComponent},
   {path: 'websites', component: WebsiteComponent},
   {path: 'websites/create', component: WebsiteFormComponent},
+  {path: 'websites/update/:id', component: WebsiteFormComponent},
   {path: 'heroes', component: WebsiteComponent},
   {path: 'detail/:id', component: WebsiteComponent}
 ];

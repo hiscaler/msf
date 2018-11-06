@@ -12,14 +12,14 @@
     </thead>
     <tbody>
     <tr *ngFor="let website of websites">
-        <td>
+        <td class="id">
             {{website.id}}
         </td>
-        <td>{{website.domain}}</td>
-        <td>
+        <td class="domain">{{website.domain}}</td>
+        <td class="buttons-2">
             <div class="btn-group" role="group" aria-label="...">
-                <a class="btn btn-default" routerLink="/websites/update/{{website.id}}">更新</a>
-                <a class="btn btn-default" routerLink="/websites/delete/{{website.id}}">删除</a>
+                <a class="btn btn-default btn-xs" routerLink="/websites/update/{{website.id}}">更新</a>
+                <a class="btn btn-danger btn-xs" routerLink="/websites/delete/{{website.id}}">删除</a>
             </div>
         </td>
     </tr>
