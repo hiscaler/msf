@@ -5,6 +5,7 @@ import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
 import { WebsiteComponent } from './components/website/website.component';
 import { AppRoutingModule } from './app-routing.module';
+import { ReactiveFormsModule} from "@angular/forms";
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './components/login/login.component';
 import { WebsiteFormComponent } from './components/website/form/website-form.component';
@@ -21,7 +22,8 @@ import { AuthInterceptor } from "./http-interceptors/auth-interceptor";
     BrowserModule,
     HttpClientModule,
     FormsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ReactiveFormsModule
   ],
   providers: [
     {

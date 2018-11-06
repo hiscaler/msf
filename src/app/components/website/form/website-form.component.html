@@ -1,31 +1,19 @@
-<form #websiteForm="ngForm" (ngSubmit)="isNewRecord ?create(model): update(model)">
+<form [formGroup]="formData" #websiteForm="ngForm" (ngSubmit)="onSubmit()">
     <div class="input-group">
         <span class="input-group-addon">域名</span>
         <input type="text" class="form-control" id="domain" name="domain"
                required="required" minlength="3"
-               [(ngModel)]="model.domain" #domain="ngModel">
-    </div>
-    <div class="form-group">
-        TODO: remove this: {{model.domain}}
-        <div *ngIf="domain.invalid"
-             class="alert alert-danger">
-            <div *ngIf="domain.errors.required">
-                域名不能为空.
-            </div>
-            <div *ngIf="domain.errors.minlength">
-                域名最少 10 个字符.
-            </div>
-        </div>
+               formControlName="domain">
     </div>
     <div class="input-group">
         <span class="input-group-addon">激活</span>
         <input type="checkbox" id="enabled" name="enabled"
-               [(ngModel)]="model.enabled">
+               formControlName="enabled">
     </div>
-    TODO: remove this: {{model.enabled}}
+    {{formData.value|json}}
     <div class="form-group">
         <div class="btn-group" role="group" aria-label="...">
-            <button type="submit" class="btn btn-success" [disabled]="!websiteForm.form.valid">提交</button>
+            <button type="submit" class="btn btn-success">提交</button>
             <button type="submit" class="btn btn-success" (click)="goBack()">返回</button>
         </div>
     </div>
