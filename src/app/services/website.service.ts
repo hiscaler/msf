@@ -28,12 +28,11 @@ export class WebsiteService {
   }
 
   update(website: Website): Observable<Website> {
-    console.info(website)
     return this.http.post<Website>('tj/website/update', website);
   }
 
-  delete(website: Website): Observable<Website> {
-    return this.http.post<Website>(this.endpoint, website);
+  delete(id: number): Observable<any> {
+    return this.http.post(`tj/website/delete?id=${id}`, null);
   }
 
 

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Website } from "../../models/Website";
 import { WebsiteService } from "../../services/website.service";
+import { Location } from "@angular/common";
 
 @Component({
   selector: 'app-website',
@@ -12,7 +13,10 @@ export class WebsiteComponent implements OnInit {
   website: Website;
   websites: Website[];
 
-  constructor(private websiteService: WebsiteService) {
+  constructor(
+    private location: Location,
+    private websiteService: WebsiteService
+  ) {
   }
 
   ngOnInit() {
@@ -41,6 +45,11 @@ export class WebsiteComponent implements OnInit {
         this.websites = response.data.items;
       }
     });
+  }
+
+  delete(id: number): void {
+    this.websiteService.delete(id);
+    this.location.go('/websites');
   }
 
 }
