@@ -14,6 +14,7 @@ export class WebsiteFormComponent implements OnInit {
 
   @Input() model: Website;
   isNewRecord: boolean;
+  pk: number;
   submitted = false;
   formData = new FormGroup({
     domain: new FormControl(''),
@@ -28,9 +29,17 @@ export class WebsiteFormComponent implements OnInit {
   }
 
   ngOnInit() {
+    const id = +this.route.snapshot.paramMap.get('id');
+    if (id) {
+      this.isNewRecord = false;
+      this.pk = id;
+      this.update(id);
+    } else {
+      this.isNewRecord = true;
+    }
   }
 
-  onSubmit(): void {
+  onCreate(): void {
     this.websiteService.create(this.formData).subscribe(response => {
       if (response.success) {
         this.model = response.data.items;
@@ -38,24 +47,23 @@ export class WebsiteFormComponent implements OnInit {
     });
   }
 
-  create(website: Website): void {
-    alert('ddd');
-    this.isNewRecord = true;
-    this.submitted = true;
-    this.model = new Website();
-    this.model.domain = 'abc';
-    this.model.enabled = true;
-    this.websiteService.create(website).subscribe(response => {
-      if (response.success) {
-        this.model = response.data.items;
+  onUpdate(id: number) {
+    this.websiteService.update(id).subscribe(response => {
+      if (response && response.success) {
+        this.formData.get('domain').setValue(response.data.domain);
+        this.formData.get('enabled').setValue(!!response.data.enabled);
       }
     });
   }
 
-  update(website: Website): void {
-    this.isNewRecord = false;
+  update(id: number): void {
     this.submitted = true;
-    this.websiteService.update(website).subscribe(response => {
+    console.info("aaaa");
+    this.websiteService.view(id).subscribe(response => {
+      if (response && response.success) {
+        this.formData.get('domain').setValue(response.data.domain);
+        this.formData.get('enabled').setValue(!!response.data.enabled);
+      }
     });
   }
 

@@ -31,6 +31,10 @@ export class WebsiteService {
     return this.http.post<Website>('tj/website/update', website);
   }
 
+  view(id: number): Observable<any> {
+    return this.http.get<any>(`tj/website/view?id=${id}`);
+  }
+
   delete(id: number): Observable<any> {
     return this.http.post(`tj/website/delete?id=${id}`, null);
   }
