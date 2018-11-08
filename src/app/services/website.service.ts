@@ -30,7 +30,7 @@ export class WebsiteService {
    * @param formData
    */
   create(formData: FormGroup): Observable<any> {
-    return this.http.post<Website>('tj/website/create', WebsiteService.parseFormData(formData));
+    return this.http.post('tj/website/create', WebsiteService.parseFormData(formData));
   }
 
   /**
