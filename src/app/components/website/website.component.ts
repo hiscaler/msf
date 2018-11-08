@@ -20,10 +20,6 @@ export class WebsiteComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getWebsites();
-  }
-
-  getWebsites(): void {
     this.websiteService.getWebsites().subscribe(response => {
       if (response.success) {
         this.websites = response.data.items;
@@ -31,16 +27,8 @@ export class WebsiteComponent implements OnInit {
     });
   }
 
-  update(id: number): void {
-    this.websiteService.getWebsites().subscribe(response => {
-      if (response.success) {
-        this.websites = response.data.items;
-      }
-    });
-  }
-
-  delete(id: number): void {
-    this.websiteService.delete(id);
+  onDelete(id: number): void {
+    this.websiteService.delete(id).subscribe();
     this.location.go('/websites');
   }
 
