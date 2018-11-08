@@ -10,10 +10,11 @@
         <input type="checkbox" id="enabled" name="enabled"
                formControlName="enabled">
     </div>
-    {{formData.value|json}}
+    <p>Form Status: {{formData.status}}</p>
+    <p>Form Value: {{formData.value|json}}</p>
     <div class="form-group">
         <div class="btn-group" role="group" aria-label="...">
-            <button type="submit" class="btn btn-success">提交</button>
+            <button type="submit" class="btn btn-success" [disabled]="formData.invalid">提交</button>
             <button type="submit" class="btn btn-success" (click)="goBack()">返回</button>
         </div>
     </div>

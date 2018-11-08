@@ -3,7 +3,7 @@ import { Website } from "../../../models/Website";
 import { Location } from "@angular/common";
 import { WebsiteService } from "../../../services/website.service";
 import { ActivatedRoute } from "@angular/router";
-import { FormControl, FormGroup } from "@angular/forms";
+import { FormControl, FormGroup, Validators } from "@angular/forms";
 
 @Component({
   selector: 'app-website-form',
@@ -17,7 +17,7 @@ export class WebsiteFormComponent implements OnInit {
   pk: number;
   submitted = false;
   formData = new FormGroup({
-    domain: new FormControl(''),
+    domain: new FormControl('', Validators.required),
     enabled: new FormControl(true)
   });
 
