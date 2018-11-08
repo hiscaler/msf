@@ -1,4 +1,4 @@
-<form [formGroup]="formData" #websiteForm="ngForm" (ngSubmit)="isNewRecord ? onCreate()? onUpdate(pk)">
+<form [formGroup]="formData" (ngSubmit)="isNewRecord ? onCreate(): onUpdate(pk)">
     <div class="input-group">
         <span class="input-group-addon">域名</span>
         <input type="text" class="form-control" id="domain" name="domain"

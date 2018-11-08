@@ -33,7 +33,13 @@ export class WebsiteFormComponent implements OnInit {
     if (id) {
       this.isNewRecord = false;
       this.pk = id;
-      this.update(id);
+      this.submitted = true;
+      this.websiteService.view(id).subscribe(response => {
+        if (response && response.success) {
+          this.formData.get('domain').setValue(response.data.domain);
+          this.formData.get('enabled').setValue(!!response.data.enabled);
+        }
+      });
     } else {
       this.isNewRecord = true;
     }
@@ -48,24 +54,15 @@ export class WebsiteFormComponent implements OnInit {
   }
 
   onUpdate(id: number) {
-    this.websiteService.update(id).subscribe(response => {
+    this.websiteService.update(id, this.formData).subscribe(response => {
       if (response && response.success) {
-        this.formData.get('domain').setValue(response.data.domain);
-        this.formData.get('enabled').setValue(!!response.data.enabled);
+        this.goBack();
+        // this.formData.get('domain').setValue(response.data.domain);
+        // this.formData.get('enabled').setValue(!!response.data.enabled);
       }
     });
   }
 
-  update(id: number): void {
-    this.submitted = true;
-    console.info("aaaa");
-    this.websiteService.view(id).subscribe(response => {
-      if (response && response.success) {
-        this.formData.get('domain').setValue(response.data.domain);
-        this.formData.get('enabled').setValue(!!response.data.enabled);
-      }
-    });
-  }
 
   goBack() {
     this.location.back();
