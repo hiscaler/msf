@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Website } from "../../../models/Website";
 import { Location } from "@angular/common";
 import { WebsiteService } from "../../../services/website.service";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 
 @Component({
@@ -24,6 +24,7 @@ export class WebsiteFormComponent implements OnInit {
   constructor(
     private websiteService: WebsiteService,
     private route: ActivatedRoute,
+    private router: Router,
     private location: Location
   ) {
   }
@@ -49,6 +50,7 @@ export class WebsiteFormComponent implements OnInit {
     this.websiteService.create(this.formData).subscribe(response => {
       if (response.success) {
         this.model = response.data.items;
+        setTimeout(() => this.router.navigateByUrl('websites'));
       }
     });
   }
