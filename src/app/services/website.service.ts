@@ -51,7 +51,7 @@ export class WebsiteService {
    * @param id
    */
   delete(id: number): Observable<any> {
-    return this.http.post(`tj/website/delete?id=${id}`, null);
+    return this.http.post<Website>(`tj/website/delete?id=${id}`, null);
   }
 
 

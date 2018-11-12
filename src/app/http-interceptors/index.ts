@@ -7,5 +7,6 @@ export const httpInterceptorProviders = [
   {
     provide: HTTP_INTERCEPTORS,
     useClass: BaseInterceptor,
-    multi: true},
+    multi: true
+  },
 ];

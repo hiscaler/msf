@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Website } from "../../models/Website";
 import { WebsiteService } from "../../services/website.service";
 import { Location } from "@angular/common";
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-website',
@@ -10,10 +11,10 @@ import { Location } from "@angular/common";
 })
 export class WebsiteComponent implements OnInit {
 
-  website: Website;
   websites: Website[];
 
   constructor(
+    private router: Router,
     private location: Location,
     private websiteService: WebsiteService
   ) {
@@ -28,8 +29,18 @@ export class WebsiteComponent implements OnInit {
   }
 
   onDelete(id: number): void {
-    this.websiteService.delete(id).subscribe();
-    this.location.go('/websites');
+    this.websiteService.delete(id).subscribe(
+      resp => {
+        // this.location.go('/websites');
+        if (resp.success) {
+          setTimeout(() => this.router.navigateByUrl('websites'));
+        }
+      },
+      err => {
+        alert('ddd');
+        console.info(err);
+      }
+    );
   }
 
 }
