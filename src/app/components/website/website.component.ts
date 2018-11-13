@@ -3,6 +3,8 @@ import { Website } from "../../models/Website";
 import { WebsiteService } from "../../services/website.service";
 import { Location } from "@angular/common";
 import { Router } from "@angular/router";
+import { GlobalService } from "../../services/global.service";
+import { ResponseBody } from "../../services/response-body.service";
 
 @Component({
   selector: 'app-website',
@@ -16,6 +18,7 @@ export class WebsiteComponent implements OnInit {
   constructor(
     private router: Router,
     private location: Location,
+    private globalService: GlobalService,
     private websiteService: WebsiteService
   ) {
   }
@@ -28,16 +31,12 @@ export class WebsiteComponent implements OnInit {
     });
   }
 
-  onDelete(id: number): void {
+  onDelete(id: number, index: number): void {
     this.websiteService.delete(id).subscribe(
       resp => {
-        // this.location.go('/websites');
-        if (resp.success) {
-          setTimeout(() => this.router.navigateByUrl('websites'));
-        }
+        this.websites.splice(index, 1);
       },
       err => {
-        alert('ddd');
         console.info(err);
       }
     );

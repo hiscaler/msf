@@ -3,6 +3,9 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Website } from "../models/Website";
 import { Observable } from "rxjs";
 import { FormGroup } from "@angular/forms";
+import { ResponseBody } from "./response-body.service";
+import { catchError } from "rxjs/operators";
+import { HttpErrorHandler } from "../handlers/HttpErrorHandler";
 
 @Injectable({
   providedIn: 'root'
@@ -12,11 +15,15 @@ export class WebsiteService {
 
   private endpoint = 'tj/website/index';
 
-  constructor(private http: HttpClient) {
+
+  constructor(
+    private http: HttpClient,
+    private httpErrorHandler: HttpErrorHandler
+  ) {
   }
 
-  getWebsites(): Observable<any> {
-    return this.http.get<any>(this.endpoint);
+  getWebsites(): Observable<ResponseBody> {
+    return this.http.get<ResponseBody>(this.endpoint);
   }
 
   private static parseFormData(formData: FormGroup): HttpParams {
@@ -38,11 +45,11 @@ export class WebsiteService {
    * @param id
    * @param formData
    */
-  update(id: number, formData: FormGroup): Observable<any> {
-    return this.http.post<Website>(`tj/website/update?id=${id}`, WebsiteService.parseFormData(formData));
+  update(id: number, formData: FormGroup): Observable<ResponseBody> {
+    return this.http.post<ResponseBody>(`tj/website/update?id=${id}`, WebsiteService.parseFormData(formData));
   }
 
-  view(id: number): Observable<any> {
+  view(id: number): Observable<ResponseBody> {
     return this.http.get<any>(`tj/website/view?id=${id}`);
   }
 
@@ -51,7 +58,9 @@ export class WebsiteService {
    * @param id
    */
   delete(id: number): Observable<any> {
-    return this.http.post<Website>(`tj/website/delete?id=${id}`, null);
+    return this.http.post<ResponseBody>(`tj/website/delete?id=${id}`, null).pipe(
+        catchError(this.httpErrorHandler.handleError('Delete website.', []))
+      );
   }
 
 
